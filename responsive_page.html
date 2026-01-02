@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Careers - MNC Opportunities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --highlight-color: #f59e0b;
+            --light-color: #f8f9fa;
+            --dark-color: #1f2937;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f9f9f9;
+        }
+        
+        /* Navigation Styles - Default (Top of Page) */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        /* Navigation Styles - On Scroll */
+        .navbar.scrolled {
+            background-color: var(--secondary-color);
+            padding: 0.8rem 5%;
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .navbar.scrolled .logo {
+            color: var(--light-color);
+        }
+        
+        .navbar.scrolled .nav-links a {
+            color: var(--light-color);
+        }
+        
+        .navbar.scrolled .nav-links a:hover {
+            color: var(--highlight-color);
+        }
+        
+        .navbar.scrolled .menu-toggle i {
+            color: var(--light-color);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .navbar.scrolled .logo span {
+            color: var(--highlight-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        /* Hover effect for nav links */
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .navbar.scrolled .nav-links a::after {
+            background-color: var(--highlight-color);
+        }
+        
+        /* Menu Toggle for Mobile */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(30, 64, 175, 0.85), rgba(30, 64, 175, 0.9)), 
+                        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--highlight-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 5rem 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+        
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Job Categories Section */
+        .job-categories {
+            background-color: #f0f0f0;
+        }
+        
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background-color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .category-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-count {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Top Companies Section */
+        .companies {
+            background-color: white;
+        }
+        
+        .companies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .company-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .company-card:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .company-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .company-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo i {
+            margin-right: 8px;
+        }
+        
+        .footer-logo span {
+            color: var(--highlight-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--highlight-color);
+            color: var(--dark-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--secondary-color);
+                padding: 2rem;
+                transition: var(--transition);
+                box-shadow: var(--shadow-strong);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .nav-links a {
+                color: white;
+                font-size: 1.2rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+            
+            .navbar.scrolled .nav-links {
+                top: 60px;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 4rem 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card, .category-card, .company-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <a href="#" class="logo"><i class="fas fa-briefcase"></i>Career<span>Explorer</span></a>
+        
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Benefits</a></li>
+            <li><a href="#categories">Job Categories</a></li>
+            <li><a href="#companies">Top Companies</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Launch Your Global Career with MNCs</h1>
+        <p>Discover exciting job opportunities in top multinational corporations. Build a rewarding career with global exposure, competitive packages, and professional growth.</p>
+        <div>
+            <a href="#categories" class="btn">Browse Jobs</a>
+            <a href="#contact" class="btn btn-secondary">Upload Resume</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="section-title">
+            <h2>Why Work for an MNC?</h2>
+            <p>Multinational companies offer unique advantages that can accelerate your career and provide exceptional professional experiences.</p>
+        </div>
+        
+        <div class="features-container">
+            <div class="feature-card">
+                <i class="fas fa-globe-americas"></i>
+                <h3>Global Exposure</h3>
+                <p>Work with international teams, understand diverse cultures, and gain experience that's valued worldwide. Many MNCs offer relocation opportunities to their global offices.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Career Growth</h3>
+                <p>Structured career paths, mentorship programs, and continuous learning opportunities help you grow faster professionally than in many local companies.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-award"></i>
+                <h3>Competitive Benefits</h3>
+                <p>Enjoy attractive compensation packages, health insurance, retirement plans, bonuses, stock options, and other perks that MNCs typically offer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Categories Section -->
+    <section class="section job-categories" id="categories">
+        <div class="section-title">
+            <h2>Explore Job Categories</h2>
+            <p>Find opportunities in high-demand fields across top multinational corporations worldwide.</p>
+        </div>
+        
+        <div class="categories-container">
+            <div class="category-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Technology</h3>
+                <p>Software development, data science, cybersecurity, cloud computing, and IT infrastructure roles at tech giants and digital transformation leaders.</p>
+                <span class="job-count">1,240+ Jobs</span>
+            </div>
+            
+            <div class="category-card">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Finance & Consulting</h3>
+                <p>Investment banking, financial analysis, management consulting, risk management, and auditing positions at global financial institutions.</p>
+                <span class="job-count">890+ Jobs</span>
+            </div>
+            
+            <div class="category-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Engineering</h3>
+                <p>Mechanical, electrical, civil, automotive, and manufacturing engineering roles in multinational industrial and engineering firms.</p>
+                <span class="job-count">1,050+ Jobs</span>
+            </div>
+            
+            <div class="category-card">
+                <i class="fas fa-syringe"></i>
+                <h3>Healthcare & Pharma</h3>
+                <p>Research, clinical development, medical affairs, and healthcare consulting roles in global pharmaceutical and healthcare companies.</p>
+                <span class="job-count">720+ Jobs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Companies Section -->
+    <section class="section companies" id="companies">
+        <div class="section-title">
+            <h2>Top Hiring MNCs</h2>
+            <p>These leading multinational corporations are actively recruiting talent across various domains and experience levels.</p>
+        </div>
+        
+        <div class="companies-container">
+            <div class="company-card">
+                <div class="company-logo">TCS</div>
+                <h3>Tata Consultancy Services</h3>
+                <p>Information Technology & Consulting</p>
+                <span class="job-count">320 Openings</span>
+            </div>
+            
+            <div class="company-card">
+                <div class="company-logo">ACC</div>
+                <h3>Accenture</h3>
+                <p>Professional Services & Technology</p>
+                <span class="job-count">280 Openings</span>
+            </div>
+            
+            <div class="company-card">
+                <div class="company-logo">AMZ</div>
+                <h3>Amazon</h3>
+                <p>E-commerce & Cloud Computing</p>
+                <span class="job-count">190 Openings</span>
+            </div>
+            
+            <div class="company-card">
+                <div class="company-logo">GSK</div>
+                <h3>GlaxoSmithKline</h3>
+                <p>Pharmaceuticals & Healthcare</p>
+                <span class="job-count">85 Openings</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-title">
+            <h2>Get Career Guidance</h2>
+            <p>Submit your details and resume to get personalized job recommendations and career counseling from our experts.</p>
+        </div>
+        
+        <div class="contact-form">
+            <form id="careerForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Years of Experience</label>
+                    <select id="experience" class="form-control" required>
+                        <option value="" disabled selected>Select your experience</option>
+                        <option value="fresher">Fresher (0-1 years)</option>
+                        <option value="early">Early Career (1-3 years)</option>
+                        <option value="mid">Mid-Level (4-7 years)</option>
+                        <option value="senior">Senior (8+ years)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="domain">Preferred Domain</label>
+                    <select id="domain" class="form-control" required>
+                        <option value="" disabled selected>Select preferred domain</option>
+                        <option value="technology">Technology</option>
+                        <option value="finance">Finance & Consulting</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="healthcare">Healthcare & Pharma</option>
+                        <option value="marketing">Marketing & Sales</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Career Goals & Skills</label>
+                    <textarea id="message" class="form-control" rows="4" placeholder="Briefly describe your career goals, key skills, and any specific companies you're interested in..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Submit for Career Guidance</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="#" class="footer-logo"><i class="fas fa-briefcase"></i>Career<span>Explorer</span></a>
+            <p>Connecting professionals with global opportunities since 2023</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 CareerExplorer. All rights reserved. | MNC Jobs Portal
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+        
+        // Form submission
+        document.getElementById('careerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const experience = document.getElementById('experience').value;
+            const domain = document.getElementById('domain').value;
+            
+            // Show success message
+            alert(`Thank you ${name}! Your career profile has been submitted successfully. Our career experts will contact you within 24 hours with personalized ${domain} opportunities matching your ${experience} level experience.`);
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize navbar state on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            }
+            
+            // Add animation to feature cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe feature cards
+            document.querySelectorAll('.feature-card, .category-card, .company-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
